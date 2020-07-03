@@ -22,7 +22,7 @@
              */
             template : `
                     <div>
-                        하위 컴포넌트 입니다.
+                        하위 your 컴포넌트 입니다.
                         <button v-on:click="showLog()">보여주세요</button>
                     </div>
                 `,
@@ -34,18 +34,31 @@
                 }
             },
         });
+
+        Vue.component('my_component', {
+            /* 
+            template을 정의할 때 HTML태그의 경우는 줄을 바꿔야 하는 경우가
+            많으므로 +와 "로 연결하는 것 보다는 `(backquote)로 사용하는 것이 편리하다.
+             */
+            template : `
+                    <div>
+                        하위 my 컴포넌트 입니다.
+                    </div>
+                `,
+            created : function() {
+                eventBus.$on('vEventBus', function(value) {
+                    console.log('이벤트를 전달받음. 전달받은 값', value);
+                });
+            }
+        });
+
         $(function() {
             /* 
             3. created 라이플 사이클 훅으로 이벤트를 받는 로직을 
             선언한다. 이때 전달한 데이터 100을 받을 수 있다.
              */
             var vue = new Vue ({
-                el : '#app',
-                created : function() {
-                    eventBus.$on('vEventBus', function(value) {
-                        console.log('이벤트를 전달받음. 전달받은 값', value);
-                    });
-                }
+                el : '#app'
             }); 
         });
     </script>
@@ -54,6 +67,7 @@
 
     <div id="app">
         <your_component></your_component>
+        <my_component></my_component>
     </div>
     
 </body>

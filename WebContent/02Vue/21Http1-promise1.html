@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21Http1-promise1.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+    <script>
+    //프로미스생성
+    /*
+    프로미스(Promise)
+    -비동기처리를 순차적으로 실행할 필요가 있는 경우 기존의 Callback을
+    중첩시켜 표현하므로 에러처리, 예외처리가 어렵다는 단점이 존재함
+    -기존 JS에서 사용하던 Callbakc의 단점을 해결하기 위한 라이브러리 
+    -프로미스의 3가지 상태(State)
+        Pending : 대기상태 비동기 처리 로직인 완료되지 않은상태
+        Fulfilled : 이행상태, 비동기 처리가 완료되어 프로미스가 결과값을 반환해준 상태
+        Rejected : 비동기 처리가 실패하거나 오류가 발생한 상태.
+    */
+    const promise1 = function(param){
+        //객체를 생성하면 Pending(대기) 상태가 됨.
+        return new Promise(function(resolve,reject){
+            if(param){
+                //Fulfilled(이행)상태일때 resolve()함수 호출
+                resolve("true이면 여기가 실행됨");
+            }else{
+                //Rejected(실패) 상태일때 reject()함수 호출
+                reject("true가 아니면 여기가 실행됨");
+            }
+        });
+    }
+    var myFunc1 = function(){
+        promise1(true).then(function(resDate){
+            console.log("호출1 : 성공시 then영역실행->",resDate);
+            return dddd;
+        })
+        .catch(function(errData){
+            console.log("호출1:실패시 catch영역실행->", errData);
+        });
+    }
+    var myFunc2 = function(){
+        promise1(false).then(function(resDate){
+            console.log("호출2 : 성공시 then영역실행->",resDate);
+            return dddd;
+        })
+        .catch(function(errData){
+            console.log("호출2:실패시 catch영역실행->", errData);
+        });
+    }
+
+      
+
+    </script>
+</head>
+<body>
+    <div id="app">
+        <h2>프로미스(Promise)</h2>
+        <button type="button" onclick="myFunc1();">프로미스호출1</button>
+        <button type="button" onclick="myFunc2();">프로미스호출2</button>
+
+    </div>
+    
+</body>
+</html>
